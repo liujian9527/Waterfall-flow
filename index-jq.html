@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--<script type="text/javascript" src="js/waterfall.js"/></script>-->
+<script>
+window.onload=function(){
+	waterfall('main','pin');	
+	var dataInt={'data':[{'src':'1.jpg'},{'src':'2.jpg'},{'src':'3.jpg'},{'src':'4.jpg'}]};
+	window.onscroll=function(){
+		 if(checkscrollside()){
+			 var oParent=document.getElementById('main');
+			 	for(var i=0; i<dataInt.data.length; i++){
+					var oPin=document.createElement('div');
+					oPin.setAttribute('class','pin');
+					oParent.appendChild(oPin);
+					var oBox=document.createElement('div');
+					oBox.setAttribute('class','box');
+					oPin.appendChild(oBox);
+					
+					var oImg=document.createElement('img');
+					oImg.src='./images/'+dataInt.data[i].src;
+					oBox.appendChild(oImg);
+					}
+			 }
+			 waterfall('main','pin');
+	}
+}
+
+function waterfall(Parent,Child){
+	var oP=document.getElementById(Parent);
+	var aPin=getClass(Child,Parent);
+	console.log(aPin.length);
+	var Width=aPin[0].offsetWidth;
+	console.log(Width);
+	var num=Math.floor(document.documentElement.clientWidth/Width);
+	console.log(num);
+	oP.style.width=num*Width+'px';
+	oP.style.margin='0 auto';
+	
+	var pinHArr=[];
+	for(var i=0; i<aPin.length; i++){
+		if(i<num){
+				pinHArr.push(aPin[i].offsetHeight);
+			}else{
+				var MinH=Math.min.apply(null,pinHArr);
+				var MinHIndex=getminHIndex(pinHArr,MinH)
+				console.log(MinHIndex);
+				aPin[i].style.position='absolute';
+				aPin[i].style.top=MinH+'px';
+				aPin[i].style.left=aPin[MinHIndex].offsetLeft+'px';
+				pinHArr[MinHIndex]+=aPin[i].offsetHeight;
+			}
+	}
+	
+	
+	
+}
+function getClass(classN,parent){
+	var oP=null;
+	var arr=[];
+	if(parent){
+		oP=document.getElementById(parent);
+	}else{
+		oP=document;
+	}
+	var aEle=oP.getElementsByTagName('*');
+	for(var i=0; i<aEle.length; i++)
+	{
+		if(aEle[i].className==classN){
+				arr.push(aEle[i]);
+			}
+		
+	}
+	return arr;
+	
+}
+/*
+function getClass(classN,parent){
+	var tagN=parent.getElementsByTagName('*');
+	var arr=[];
+	
+	for(var i=0; i<tagN.length; i++){
+		if(tagN[i].className==classN){
+			arr.push(tagN[i]);
+			}
+		}
+		return arr;	
+}*/
+
+
+
+function getminHIndex(arr,minH){
+	for(var i=0; i<arr.length; i++){
+		if(arr[i]==minH){
+				return i;
+			}
+		}
+
+}
+
+function checkscrollside(){
+	var oP=document.getElementById('main');
+	var aPin=getClass('pin','main');
+	var lastPinH=aPin[aPin.length-1].offsetTop+Math.floor(aPin[aPin.length-1].offsetHeight/2);
+	var ScrollT=document.documentElement.scrollTop||document.body.scrollTop;
+	var ClientH=document.documentElement.clientHeight;
+	
+	return (lastPinH<ScrollT+ClientH)?true:false;
+}
+</script>
+<title></title>
+<style type="text/css">
+    *{padding: 0;margin:0;}
+    #main{
+        position: relative;
+    }
+    .pin{
+        padding: 15px 0 0 15px;
+        float:left;
+    }
+    .box{
+        padding: 10px;
+        border:1px solid #ccc;
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 5px;
+    }
+    .box img{
+        width:162px;
+        height:auto;
+    }
+</style>
+</head>
+<body>
+<div id="main">
+    <div class="pin">
+        <div class="box">
+            <img src="./images/1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/5.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/6.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/7.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/8.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/9.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/10.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/11.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/12.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/13.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/14.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/15.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/16.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/17.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/18.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/19.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/20.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="./images/21.jpg"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
